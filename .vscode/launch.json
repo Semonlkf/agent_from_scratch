@@ -1,0 +1,24 @@
+{
+    // 使用 IntelliSense 了解相关属性。 
+    // 悬停以查看现有属性的描述。
+    // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0", // 无须改动
+    "configurations": [
+        {
+            "name": "Python: 远程调试", // 无须改动
+            "type": "python", // 无须改动，但是注意你的vscode界面右下角一般会显示你当前使用的Python环境，以便可以对编辑界面进行解析。如果右下角只显示文件类型为python，没有显示Python环境，并且平时编辑代码vscode并没有提示，说明vscode并没有正确地识别到python环境，这会导致调试失败，提示不支持当前type，即使此时项目可以在命令行运行。
+            "request": "attach", // 无需改动，这一配置表示你的调试是依托于远程运行的程序的。
+            "listen": {
+                "host": "0.0.0.0", // 无需改动，表示启动调试后会跳板机会监听本机的某个端口，该端口会收GPU结点发送的调试信息，从而你可以在跳板机上看到程序运行情况。
+                "port": 6789 // 端口号，注意不要与已有端口冲突，与run.py中debugpy.connect的端口保持一致
+            },
+            "pathMappings": [
+                {
+                    "localRoot": "${workspaceFolder}", //远程调试并不需要在跳板机指定某个文件，而是GPU结点运行到某个文件，vscode就打开跳板机上对应的某个文件。所以只需要指定远程GPU结点的目录与作为本地的跳板机上的哪个目录是对应的。
+                    "remoteRoot": "."
+                }
+            ],
+            "justMyCode": false, //是否进入import的包
+        }
+    ]
+}
